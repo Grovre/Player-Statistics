@@ -16,7 +16,7 @@ public class Statistics {
     private static Map<UUID, Statistics> globalStats = new HashMap<>();
 
     private UUID uuid;
-    private Map<Tracked, Integer> statisticsMap = new HashMap<>();
+    private final Map<Tracked, Integer> statisticsMap = new HashMap<>();
 
     private Statistics(UUID uuid) {
         Statistics potential = globalStats.get(uuid);
@@ -67,8 +67,8 @@ public class Statistics {
         });
     }
 
-    private static void loadGlobalStats() throws IOException {
-        File db = null;
+    protected static void loadGlobalStats() throws IOException {
+        File db;
         try {
             db = PlayerStatistics.getDatabaseFile();
         } catch (IOException e) {
@@ -82,14 +82,14 @@ public class Statistics {
         r.close();
     }
 
-    private static void saveGlobalStats() throws IOException {
-        File db = null;
+    protected static void saveGlobalStats() throws IOException {
+        File db;
         try {
             db = PlayerStatistics.getDatabaseFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        Writer wr = new FileWriter(PlayerStatistics.getDatabaseFile());
+        Writer wr = new FileWriter(db, true);
         Gson gson = new Gson();
         gson.toJson(Collections.unmodifiableMap(globalStats), wr);
         wr.close();
