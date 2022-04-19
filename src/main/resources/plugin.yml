@@ -1,0 +1,6 @@
+name: Player Statistics
+version: '${project.version}'
+main: github.grovre.playerstatistics.PlayerStatistics
+api-version: 1.18
+authors: [ PoptartFromPluto ]
+website: https://github.com/grovre
