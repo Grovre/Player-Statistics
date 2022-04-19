@@ -64,4 +64,12 @@ public class PlayerEvents implements Listener, TrackedEvent {
         if(!(caught instanceof Fish)) return;
         this.add(Tracked.CAUGHT_FISH, uuid, 1);
     }
+
+    @EventHandler
+    public void OnPlayerMessageEvent(AsyncPlayerChatEvent event) {
+        UUID uuid = event.getPlayer().getUniqueId();
+        this.add(Tracked.MESSAGES_SENT, uuid, 1);
+        int charCount = event.getMessage().length();
+        this.add(Tracked.CHARACTERS_TYPED, uuid, charCount);
+    }
 }

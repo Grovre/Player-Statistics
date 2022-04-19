@@ -11,5 +11,7 @@ public enum Tracked {
     DROPPED_ITEMS,
     EXP_GAINED,
     THROWN_EGGS,
-    CAUGHT_FISH
+    CAUGHT_FISH,
+    MESSAGES_SENT,
+    CHARACTERS_TYPED
 }
