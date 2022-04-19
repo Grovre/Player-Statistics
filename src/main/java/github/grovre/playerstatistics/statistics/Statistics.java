@@ -3,6 +3,7 @@ package github.grovre.playerstatistics.statistics;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
 import github.grovre.playerstatistics.PlayerStatistics;
+import org.bukkit.Bukkit;
 
 import java.io.*;
 import java.util.Collections;
@@ -46,7 +47,27 @@ public class Statistics {
         return Collections.unmodifiableMap(globalStats);
     }
 
-    protected static void loadGlobalStats() throws IOException {
+    protected static void loadGlobalStatsAsync() {
+        Bukkit.getScheduler().runTaskAsynchronously(PlayerStatistics.plugin, () -> {
+            try {
+                loadGlobalStats();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    protected static void saveGlobalStatsAsync() {
+        Bukkit.getScheduler().runTaskAsynchronously(PlayerStatistics.plugin, () -> {
+            try {
+                saveGlobalStats();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    private static void loadGlobalStats() throws IOException {
         File db = null;
         try {
             db = PlayerStatistics.getDatabaseFile();
@@ -61,7 +82,7 @@ public class Statistics {
         r.close();
     }
 
-    protected static void saveGlobalStats() throws IOException {
+    private static void saveGlobalStats() throws IOException {
         File db = null;
         try {
             db = PlayerStatistics.getDatabaseFile();
