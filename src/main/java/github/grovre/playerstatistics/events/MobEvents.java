@@ -1,7 +1,6 @@
 package github.grovre.playerstatistics.events;
 
 import github.grovre.playerstatistics.statistics.Tracked;
-import github.grovre.playerstatistics.statistics.TrackedEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
