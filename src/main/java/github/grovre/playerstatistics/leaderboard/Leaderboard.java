@@ -11,8 +11,8 @@ import java.util.UUID;
 
 public class Leaderboard {
 
-    private UUID playerId;
-    private Tracked trackedEvent;
+    private final UUID playerId;
+    private final Tracked trackedEvent;
     public final static ChatColor nameColor = ChatColor.WHITE;
     public final static ChatColor statColor = ChatColor.YELLOW;
 
