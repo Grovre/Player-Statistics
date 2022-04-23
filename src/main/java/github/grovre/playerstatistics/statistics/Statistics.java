@@ -7,10 +7,7 @@ import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
 import java.io.*;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 public class Statistics {
 
@@ -93,5 +90,21 @@ public class Statistics {
         Gson gson = new Gson();
         gson.toJson(Collections.unmodifiableMap(globalStats), wr);
         wr.close();
+    }
+
+    public int getEventStats(Tracked tracked) {
+        return this.statisticsMap.get(tracked);
+    }
+
+    public static TreeMap<UUID, Integer> getGlobalStatsByTracked(Tracked tracked) {
+        TreeMap<UUID, Integer> orderedMap = new TreeMap<>();
+        for(Map.Entry<UUID, Statistics> original : globalStats.entrySet()) {
+            Statistics stats = original.getValue();
+            UUID playerId = original.getKey();
+            int trackedCount = stats.getEventStats(tracked);
+            orderedMap.put(playerId, trackedCount);
+        }
+
+        return orderedMap;
     }
 }
