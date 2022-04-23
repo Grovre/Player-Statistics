@@ -1,4 +1,7 @@
-package github.grovre.playerstatistics.statistics;
+package github.grovre.playerstatistics.events;
+
+import github.grovre.playerstatistics.statistics.Statistics;
+import github.grovre.playerstatistics.statistics.Tracked;
 
 import java.util.UUID;
 
