@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import github.grovre.playerstatistics.PlayerStatistics;
 import org.bukkit.Bukkit;
 
+import javax.annotation.Nonnull;
 import java.io.*;
 import java.util.Collections;
 import java.util.HashMap;
@@ -15,20 +16,19 @@ public class Statistics {
 
     private static Map<UUID, Statistics> globalStats = new HashMap<>();
 
-    private UUID uuid;
-    private final Map<Tracked, Integer> statisticsMap = new HashMap<>();
+    private final UUID uuid;
+    private final Map<Tracked, Integer> statisticsMap;
 
     private Statistics(UUID uuid) {
-        Statistics potential = globalStats.get(uuid);
-        if(potential != null) return;
-
+        assert uuid != null;
         this.uuid = uuid;
-        for(Tracked v : Tracked.values()) {
-            this.statisticsMap.put(v, 0);
-        }
+        this.statisticsMap = new HashMap<>();
+        globalStats.put(uuid, this);
     }
 
+    @Nonnull
     public static Statistics get(UUID uuid) {
+        assert uuid != null;
         Statistics stats = globalStats.get(uuid);
         if(stats != null) return stats;
 
