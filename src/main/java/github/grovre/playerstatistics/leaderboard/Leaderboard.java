@@ -1,5 +1,6 @@
 package github.grovre.playerstatistics.leaderboard;
 
+import github.grovre.playerstatistics.PlayerStatistics;
 import github.grovre.playerstatistics.statistics.Statistics;
 import github.grovre.playerstatistics.statistics.Tracked;
 import org.bukkit.Bukkit;
@@ -15,6 +16,10 @@ public class Leaderboard {
     private final Tracked trackedEvent;
     public final static ChatColor nameColor = ChatColor.WHITE;
     public final static ChatColor statColor = ChatColor.YELLOW;
+    public final static int maxNameLength = PlayerStatistics.plugin
+            .getConfig().getInt("MaxNameLengthOnLeaderboard");
+    public final static int rows = PlayerStatistics.plugin
+            .getConfig().getInt("NumberOfPlayersShownOnLeaderboard");
 
     public Leaderboard(UUID playerId, Tracked trackedEvent) {
         this.trackedEvent = trackedEvent;
@@ -25,7 +30,7 @@ public class Leaderboard {
         return this.trackedEvent.color + this.trackedEvent.name + ":";
     }
 
-    public String[] rankings(int rows, int maxNameLength) {
+    public String[] rankings() {
         TreeMap<UUID, Integer> ordered = Statistics.getGlobalStatsByTracked(this.trackedEvent);
         String[] rankRows = new String[rows];
         for(int rank = 0; rank < rows;) {
@@ -45,6 +50,6 @@ public class Leaderboard {
     public void send(Player player) {
         player.sendMessage(this.header());
         // TODO: 4/23/22 Add config options for leaderboard stuff
-        player.sendMessage(this.rankings(10, Integer.MAX_VALUE));
+        player.sendMessage(this.rankings());
     }
 }

@@ -1,1 +1,3 @@
 AutosaveInterval: 600000 # In ms
+MaxNameLengthOnLeaderboard: 16 # 16 is the longest any username will be. No name is longer than 16
+NumberOfPlayersShownOnLeaderboard: 10 # How many rows of people on leaderboards
