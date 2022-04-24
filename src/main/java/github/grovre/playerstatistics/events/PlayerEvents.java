@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Fish;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.*;
 
 import java.util.UUID;
@@ -70,5 +71,11 @@ public class PlayerEvents implements Listener, TrackedEvent {
         this.add(Tracked.MESSAGES_SENT, uuid, 1);
         int charCount = event.getMessage().length();
         this.add(Tracked.CHARACTERS_TYPED, uuid, charCount);
+    }
+
+    @EventHandler
+    public void OnPlayerDeathEvent(PlayerDeathEvent event) {
+        UUID uuid = event.getEntity().getUniqueId();
+        this.add(Tracked.PLAYER_DEATHS, uuid, 1);
     }
 }

@@ -15,7 +15,8 @@ public enum Tracked {
     THROWN_EGGS (ChatColor.YELLOW, "Eggs Thrown"),
     CAUGHT_FISH (ChatColor.YELLOW, "Fish Caught"),
     MESSAGES_SENT (ChatColor.AQUA, "Sent Messages"),
-    CHARACTERS_TYPED (ChatColor.DARK_AQUA, "Sent Characters");
+    CHARACTERS_TYPED (ChatColor.DARK_AQUA, "Sent Characters"),
+    PLAYER_DEATHS (ChatColor.RED, "Player deaths");
 
     public final ChatColor color;
     public final String name;
