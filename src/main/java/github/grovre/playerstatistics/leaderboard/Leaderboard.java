@@ -49,7 +49,6 @@ public class Leaderboard {
 
     public void send(Player player) {
         player.sendMessage(this.header());
-        // TODO: 4/23/22 Add config options for leaderboard stuff
         player.sendMessage(this.rankings());
     }
 }

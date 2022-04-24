@@ -14,6 +14,8 @@ public final class PlayerStatistics extends JavaPlugin implements StatisticsIoCo
 
     public static PlayerStatistics plugin;
 
+    // TODO: 4/24/22 Do commands for leaderboards now
+
     @Override
     public void onEnable() {
         // Plugin startup logic
