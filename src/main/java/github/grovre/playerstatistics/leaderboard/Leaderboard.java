@@ -7,6 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
 
@@ -32,17 +33,31 @@ public class Leaderboard {
 
     public String[] rankings() {
         TreeMap<UUID, Integer> ordered = Statistics.getGlobalStatsByTracked(this.trackedEvent);
-        String[] rankRows = new String[rows];
+        String[] rankRows = new String[rows+2];
+        int ownRank = -1;
+        boolean ownFound = false;
+        Map.Entry<UUID, Integer> entry;
         for(int rank = 0; rank < rows;) {
-            String playerName = Bukkit.getOfflinePlayer(this.playerId).getName();
-            int score = ordered.pollLastEntry().getValue();
+            entry = ordered.pollLastEntry();
+            int score = entry.getValue();
+            UUID uuid = entry.getKey();
+            String playerName = Bukkit.getOfflinePlayer(uuid).getName();
             if(playerName == null) continue;
             if(playerName.length() > maxNameLength) {
                 playerName = playerName.substring(0, maxNameLength);
             }
+            if(!ownFound) {
+                ownRank = rank;
+            }
+            if(this.playerId == uuid) {
+                ownFound = true;
+            }
 
             rankRows[rank++] = "[#" + rank + "] | " + nameColor + playerName + ": " + statColor + score;
         }
+
+        rankRows[rows] = "--------------";
+        rankRows[rows+1] = "[#" + ownRank + "] | " + nameColor + Bukkit.getPlayer(this.playerId);
 
         return rankRows;
     }
