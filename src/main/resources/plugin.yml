@@ -4,3 +4,10 @@ main: github.grovre.playerstatistics.PlayerStatistics
 api-version: 1.18
 authors: [ PoptartFromPluto ]
 website: https://github.com/grovre
+commands:
+  leaderboard:
+    usage: Shows a leaderboard of a tracked event
+    description: Shows a leaderboard of a tracked event
+  lb:
+    usage: Shortened use of /leaderboard
+    description: Shortened usage of /leaderboard
