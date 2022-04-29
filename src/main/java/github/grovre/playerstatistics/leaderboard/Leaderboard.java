@@ -47,7 +47,7 @@ public class Leaderboard {
         return rankRows;
     }
 
-    public void send(Player player) {
+    public void sendTo(Player player) {
         player.sendMessage(this.header());
         player.sendMessage(this.rankings());
     }
